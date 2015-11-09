@@ -1,2 +1,11 @@
-// @import "bootstrap-sprockets";
-// @import "bootstrap";
+.results-block {
+    display: inline-block;
+}
+
+#stock-lookup-errors {
+    color: Red;
+}
+
+#spinner {
+    display: none;
+}
