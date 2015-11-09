@@ -38,5 +38,6 @@ end
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+gem 'stock_quote'
 # gem 'will_paginate', '3.0.7'
 # gem 'bootstrap-will_paginate', '0.0.10'
