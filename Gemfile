@@ -30,11 +30,13 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'puma'
 end
 
 # Project-specific
 
-gem 'bootstrap-sass', '~> 3.3.5'
+# gem 'bootstrap-sass', '~> 3.3.5'
+gem 'devise'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
 # gem 'will_paginate', '3.0.7'
 # gem 'bootstrap-will_paginate', '0.0.10'
