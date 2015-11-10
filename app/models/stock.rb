@@ -1,5 +1,8 @@
 # Model for stock, with several class functions
 class Stock < ActiveRecord::Base
+  has_many :user_stocks
+  has_many :users, through: :user_stocks
+
   class << self
     def new_from_lookup(ticker)
       looked_up = StockQuote::Stock.quote(ticker)
