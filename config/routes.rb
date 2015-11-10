@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :user_stocks
   devise_for :users
+  resources :user_stocks, except: [:edit, :update, :show]
 
   root to: 'welcome#index'
 
