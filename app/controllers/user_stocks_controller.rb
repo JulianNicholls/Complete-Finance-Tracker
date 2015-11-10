@@ -33,7 +33,7 @@ class UserStocksController < ApplicationController
     @user_stock = UserStock.find(params[:id])
     @user_stock.destroy
     respond_to do |format|
-      format.html { redirect_to user_stocks_url, notice: 'The stock was successfully removed.' }
+      format.html { redirect_to my_portfolio_path, notice: 'The stock was successfully removed.' }
       format.json { head :no_content }
     end
   end
