@@ -9,3 +9,42 @@
 #spinner {
     display: none;
 }
+
+.no-padding {
+    padding: 0 0 5px 0 !important;
+}
+
+.left-padding {
+    padding-left: 15px !important;
+}
+
+footer {
+    margin-top: 20px;
+    color: #777;
+    border-top: 1px solid #eaeaea;
+    padding: 10px 10px 5px 10px;
+}
+
+.user-name {
+    padding-top: 15px;
+}
+
+.logout {
+    padding-left: 0;
+}
+
+.nav.navbar-right {
+    .btn {
+        color: #fff !important;
+        margin-top: 5%;
+    }
+
+    .btn-danger:hover {
+        background-color: darken(#d9534f, 20%) !important;
+    }
+}
+
+.jumbotron h1 {
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+}
