@@ -7,10 +7,8 @@ class User < ActiveRecord::Base
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
 
-  def fulll_name
-    return "#{first_name} #{last_name}" if first_name || last_name
-
-    'Anonymous'
+  def full_name
+    "#{first_name} #{last_name}".strip
   end
 
   def can_add_stock?(ticker)
