@@ -20,7 +20,26 @@
 
 footer {
     margin-top: 20px;
-    background: #eaeaea;
-    border-top: 1px solid #c0c0c0;
-    padding: 10px;
+    color: #777;
+    border-top: 1px solid #eaeaea;
+    padding: 10px 10px 5px 10px;
+}
+
+.user-name {
+    padding-top: 15px;
+}
+
+.logout {
+    padding-left: 0;
+}
+
+.nav.navbar-right {
+    .btn {
+        color: #fff !important;
+        margin-top: 5%;
+    }
+
+    .btn-danger:hover {
+        background-color: darken(#d9534f, 20%) !important;
+    }
 }
