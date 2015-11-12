@@ -1,3 +1,4 @@
+# Controller for user registration to allow for first and last names
 class User::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
 

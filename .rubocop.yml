@@ -4,3 +4,5 @@ AllCops:
    - 'db/migrate/*.rb'
    - 'bin/*'
    - 'config/application.rb'
+   - 'config/initializers/devise.rb'
+   - 'config/environments/*'

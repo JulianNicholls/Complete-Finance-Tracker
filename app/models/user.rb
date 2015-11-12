@@ -1,8 +1,10 @@
+# Model for User
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :recoverable
   devise :database_authenticatable, :registerable,
-         :rememberable, :trackable, :validatable  # :recoverable
+         :rememberable, :trackable, :validatable
 
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
@@ -30,6 +32,5 @@ class User < ActiveRecord::Base
   end
 
   def search
-
   end
 end

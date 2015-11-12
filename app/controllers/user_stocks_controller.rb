@@ -1,3 +1,4 @@
+# Controller fur user tracked stocks
 class UserStocksController < ApplicationController
   # GET /user_stocks
   # GET /user_stocks.json
@@ -17,12 +18,19 @@ class UserStocksController < ApplicationController
 
     respond_to do |format|
       if @user_stock.save
-        format.html { redirect_to my_portfolio_path,
-                                  notice: "The stock #{@user_stock.stock.ticker} was successfully added." }
+        ticker = @user_stock.stock.ticker
+
+        format.html do
+          redirect_to my_portfolio_path,
+                      notice: "The stock #{ticker} was successfully added."
+        end
         format.json { render :show, status: :created, location: @user_stock }
       else
         format.html { render :new }
-        format.json { render json: @user_stock.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @user_stock.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -32,14 +40,19 @@ class UserStocksController < ApplicationController
   def destroy
     @user_stock = UserStock.find(params[:id])
     @user_stock.destroy
+
     respond_to do |format|
-      format.html { redirect_to my_portfolio_path, notice: 'The stock was successfully removed.' }
+      format.html do
+        redirect_to my_portfolio_path,
+                    notice: 'The stock was successfully removed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-  # Never trust parameters from the scary internet, only allow the white list through.
+
+  # Never trust parameters from the internet, only allow the white list through.
   def user_stock_params
     params.require(:user_stock).permit(:user_id, :stock_id)
   end
@@ -54,19 +67,13 @@ class UserStocksController < ApplicationController
 
   def create_from_stock_record
     stock = Stock.find_by_ticker stock_ticker
+    return record_from_stock(stock) if stock
 
-    if stock
-      record_from_stock stock
-    else
-      stock = Stock.new_from_lookup stock_ticker
+    stock = Stock.new_from_lookup stock_ticker
+    return record_from_stock(stock) if stock.save
 
-      if stock.save
-        record_from_stock stock
-      else
-        flash[:error] = "The stock is not available."
-        nil
-      end
-    end
+    flash[:error] = 'The stock is not currently available.'
+    nil
   end
 
   def record_from_stock(stock)

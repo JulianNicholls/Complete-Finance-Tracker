@@ -1,3 +1,4 @@
+# Controller fur users
 class UsersController < ApplicationController
   def my_portfolio
     @user = current_user
@@ -26,7 +27,8 @@ class UsersController < ApplicationController
     if current_user.save
       redirect_to my_friends_path, notice: 'That friend has been added.'
     else
-      redirect_to my_friends_path, flash[:error] = 'There was an error with adding that friend.'
+      redirect_to my_friends_path,
+                  flash[:error] = 'There was an error with adding that friend.'
     end
   end
 end
