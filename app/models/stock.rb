@@ -5,11 +5,13 @@ class Stock < ActiveRecord::Base
 
   class << self
     def new_from_lookup(ticker)
-      looked_up = StockQuote::Stock.quote(ticker)
+      looked_up = StockTicker.new(ticker)
 
-      return nil unless looked_up.name
+      name = looked_up.name
 
-      new_stock = new(ticker: looked_up.symbol, name: looked_up.name)
+      return nil unless name
+
+      new_stock = new(ticker: looked_up.symbol, name: name)
       new_stock.last_price = new_stock.price
       new_stock
     end
@@ -20,16 +22,37 @@ class Stock < ActiveRecord::Base
   end
 
   def price
-    stock = StockQuote::Stock.quote(ticker)
+    StockTicker.new(ticker).price
+  end
+end
 
-    if stock
-      closing = stock.close
-      return "#{closing} (Closing)" if closing
+# Shim for stock_quote gem
+class StockTicker
+  attr_reader :symbol
 
-      opening = stock.open
-      return "#{opening} (Opening)" if opening
-    end
+  def initialize(symbol)
+    @symbol = symbol
+    @ticker = StockQuote::Stock.quote(symbol)
+  end
+
+  def price
+    return "#{closing} (Closing)" if closing
+    return "#{opening} (Opening)" if opening
 
     'Unavailable'
+  end
+
+  def name
+    @ticker.name
+  end
+
+  private
+
+  def closing
+    @ticker.close
+  end
+
+  def opening
+    @ticker.open
   end
 end
