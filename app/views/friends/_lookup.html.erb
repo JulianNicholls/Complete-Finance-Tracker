@@ -19,7 +19,7 @@
   <% if @users %>
     <% if @users.any? %>
       <div id="friend-lookup-results" class="well results-block">
-        <table class="search-results-table">
+        <table class="table search-results-table">
           <tbody>
           <% @users.each do |user| %>
             <tr>
@@ -29,7 +29,7 @@
                 <strong>Profile:</strong>
                 <%= link_to 'Show profile', user, class: 'btn btn-xs btn-success' %>
                 <% if current_user.not_friends_with? user %>
-                  <%= link_to 'Add as friend', add_friends_path(user: current_user, friend: user),
+                  <%= link_to 'Add as friend', add_friend_path(user: current_user, friend: user),
                               method: :post, class: 'btn btn-xs btn-success' %>
 
                 <% else %>

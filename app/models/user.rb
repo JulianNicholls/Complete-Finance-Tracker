@@ -11,6 +11,33 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, through: :friendships
 
+  class << self
+    def search(param)
+      return user.none if param.blank?
+
+      param.strip!
+      param.downcase!
+
+      (first_name_matches(param) + last_name_matches(param) + email_matches(param)).uniq
+    end
+
+    def first_name_matches(param)
+      matches('first_name', param)
+    end
+
+    def last_name_matches(param)
+      matches('last_name', param)
+    end
+
+    def email_matches(param)
+      matches('email', param)
+    end
+
+    def matches(field_name, param)
+      where("LOWER(#{field_name}) LIKE ?", "%#{param}%")
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}".strip
   end
@@ -31,6 +58,11 @@ class User < ActiveRecord::Base
     user_stocks.where(stock_id: stock.id).exists?
   end
 
-  def search
+  def not_friends_with?(other)
+    friendships.where(friend_id: other.id).count < 1
+  end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
   end
 end

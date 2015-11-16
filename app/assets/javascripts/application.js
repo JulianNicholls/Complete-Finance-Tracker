@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
+// require turbolinks           // Turbolinks is what's breaking the search Ajax
 //= require_tree .
 
 function hide_spinner() {

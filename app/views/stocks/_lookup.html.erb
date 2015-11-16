@@ -28,7 +28,7 @@
                     method: :post, class: 'btn btn-xs btn-success' %>
       <% else %>
         <h4><span class="label label-warning">
-          Stock cannot be added because you have already added
+          The stock cannot be tracked because you have already added
 
           <% if current_user.stock_already_added? @stock.ticker %>
             this stock.
