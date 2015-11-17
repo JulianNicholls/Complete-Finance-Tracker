@@ -1,8 +1,13 @@
 # Controller fur users
 class UsersController < ApplicationController
+  def show
+    @user        = User.find params[:id]
+    @user_stocks = @user.stocks
+  end
+
   def my_portfolio
-    @user = current_user
-    @user_stocks = current_user.stocks
+    @user        = current_user
+    @user_stocks = @user.stocks
   end
 
   def my_friends
